@@ -1,27 +1,24 @@
 const form = document.getElementById('form');
 const bookList = document.getElementById('bookList');
-const btn = document.getElementById('btn');
-
-
+/* eslint-disable no-use-before-define */
 let booksList = JSON.parse(localStorage.getItem('books')) || [];
 
-
- function addBook (title, author) {
+function addBook(title, author) {
   const newBook = { title, author };
   booksList.push(newBook);
-  localStorage.setItem("books", JSON.stringify(booksList));
+  localStorage.setItem('books', JSON.stringify(booksList));
   displayBooks();
- }
+}
 
- function removeBook(book) {
+function removeBook(book) {
   booksList = booksList.filter((a) => a !== book);
   localStorage.setItem('books', JSON.stringify(booksList));
   displayBooks();
 }
 
- function displayBooks() {
-    bookList.innerHTML = '';
-    booksList.forEach((book) => {
+function displayBooks() {
+  bookList.innerHTML = '';
+  booksList.forEach((book) => {
     const li = document.createElement('li');
     li.innerHTML = `${book.title} <br> ${book.author} <br>`;
     const removeBtn = document.createElement('button');
@@ -32,15 +29,15 @@ let booksList = JSON.parse(localStorage.getItem('books')) || [];
     bookList.appendChild(li);
     bookList.appendChild(hr);
   });
-};
+}
 
- displayBooks();
- 
- form.addEventListener('submit', (event) => {
+displayBooks();
+
+form.addEventListener('submit', (event) => {
   event.preventDefault();
   const bookTitle = document.getElementById('titleInput');
   const bookAuthor = document.getElementById('authorInput');
   addBook(bookTitle.value, bookAuthor.value);
-  titleInput.value = '';
-  authorInput.value = '';
- });
+  bookTitle.value = '';
+  bookAuthor.value = '';
+});
